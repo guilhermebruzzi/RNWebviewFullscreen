@@ -1,0 +1,19 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "extends": "airbnb",
+  "rules": {
+    "no-underscore-dangle": 0,
+    "import/no-unresolved": 0,
+  },
+  "plugins": [
+    "react",
+    "react-native",
+    "flowtype"
+  ]
+}
