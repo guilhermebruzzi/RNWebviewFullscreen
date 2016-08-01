@@ -8,7 +8,7 @@ import { WebViewBridge, FullScreenWebViewBridge } from 'react-native-webview-bri
 const styles = StyleSheet.create({
   webview: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: 'black',
   },
 });
 

@@ -1,6 +1,7 @@
 package com.github.alinz.reactnativewebviewbridge;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +29,7 @@ public class CustomView extends LinearLayout {
     public void init(final Activity activity) {
         Log.e("CustomView", "" + R.layout.custom_layout);
 
-        inflate(getContext(), R.layout.custom_layout, this);
+        final View root = inflate(getContext(), R.layout.custom_layout, this);
         webView = (VideoEnabledWebView)findViewById(R.id.webView);
 
         // Initialize the VideoEnabledWebChromeClient and set event handlers
@@ -62,6 +63,23 @@ public class CustomView extends LinearLayout {
                         //noinspection all
                         activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
                     }
+
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                                }
+                            });
+                        }
+                    }.start();
+
+//                    root.invalidate();
+//                    root.requestLayout();
+//                    activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//                    activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 }
                 else
                 {
@@ -74,6 +92,7 @@ public class CustomView extends LinearLayout {
                         //noinspection all
                         activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
                     }
+                    activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                 }
 
             }
